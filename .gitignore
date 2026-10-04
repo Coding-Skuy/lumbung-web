@@ -1,0 +1,20 @@
+# Bun / Node
+node_modules/
+.bun/
+bun.lockb
+
+# SvelteKit
+.svelte-kit/
+build/
+dist/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.local
