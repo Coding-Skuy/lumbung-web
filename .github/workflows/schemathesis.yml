@@ -12,6 +12,9 @@ on:
       max_examples:
         description: Contoh per operasi
         default: "25"
+      methods:
+        description: Metode HTTP (dipisah koma); POST dst. menulis data, hanya untuk backend uji
+        default: GET
 permissions:
   contents: read
 jobs:
@@ -27,6 +30,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.BACKEND_READ_TOKEN || github.token }}
           ADMIN_TOKEN: ${{ secrets.LUMBUNG_ADMIN_TOKEN }}
+          SERVICE_KEY: ${{ secrets.LUMBUNG_SERVICE_KEY }}
+          METHODS: ${{ inputs.methods }}
           BASE_URL: ${{ inputs.base_url }}
           TAGS: ${{ inputs.tags }}
           MAX_EXAMPLES: ${{ inputs.max_examples }}
