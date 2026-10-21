@@ -6,3 +6,4 @@ Semua perubahan penting lumbung-web dicatat di sini. Format mengikuti Keep a Cha
 
 ### Ditambahkan
 - Fondasi AI-dev v1.0.0: `AGENTS.md`, `CLAUDE.md`, `docs/decisions/` (ADR-0001), `versions/v1.0.0/docs/40-TECHSTACK.md`, `versions/v1.0.0/docs/60-BLAST-RADIUS.md` (tiket LMB-WEB-001, 2026-10-14).
+- Uji properti Schemathesis: `contract/schemathesis.sh`, `contract/README.md`, workflow manual `schemathesis.yml` (tiket LMB-WEB-TEST-SCHEMATHESIS).
