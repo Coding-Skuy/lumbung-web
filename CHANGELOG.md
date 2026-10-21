@@ -9,6 +9,7 @@ Semua perubahan penting lumbung-web dicatat di sini. Format mengikuti Keep a Cha
 - Fondasi build: `tsconfig.json`, `vite.config.ts`, adapter-node, vite-plugin-svelte, `src/app.html`, `src/app.d.ts`, skrip `test`, ADR-0002 (issue #10).
 
 - Halaman publik `/papan-harga` dan `/profil` (SSR, cache 15 menit), klien server-side, tipe kontrak (issue #2).
+- Uji kontrak konsumen Pact untuk endpoint publik, keluaran `pacts/`, `docs/testing/pact.md` (issue #6).
 
 ### Diubah
 - Pin `bun-types` 1.4.4 (tidak ada di npm) diganti 1.4.2 (issue #10).
