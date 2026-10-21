@@ -8,9 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "test": "bun test"
+    "test": "bun test",
+    "test:pact": "rm -rf pacts && bun test tests/pact"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "17.1.4",
     "@sveltejs/adapter-node": "5.2.13",
     "@sveltejs/kit": "2.22.0",
     "@sveltejs/vite-plugin-svelte": "6.2.0",
