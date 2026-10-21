@@ -1,7 +1,11 @@
-/** Konfigurasi SvelteKit stub untuk lumbung-web. */
+import adapter from "@sveltejs/adapter-node";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+
+/** Konfigurasi SvelteKit lumbung-web (SSR di VPS, ADR-0001). */
 const config = {
+  preprocess: vitePreprocess(),
   kit: {
-    // Adapter default; ganti ke adapter-node / adapter-static saat deploy.
+    adapter: adapter(),
     alias: {
       $lib: "./src/lib"
     }
