@@ -1,0 +1,30 @@
+# Alur bisnis utama: warga membuka papan harga publik (tanpa login) dan melihat angka resmi dari server.
+# Prasyarat: papan minggu berjalan sudah terbit di backend (jalur 200). Tanpa papan, halaman menampilkan "belum terbit".
+# Jalankan: maestro test --platform web -e WEB_URL=http://localhost:3000 .maestro/papan-harga-publik.yaml
+url: ${WEB_URL}
+name: Papan harga publik
+tags:
+  - bisnis
+---
+- launchApp
+- tapOn:
+    id: tautan-papan-harga
+- assertVisible:
+    id: papan-judul
+- assertVisible:
+    id: papan-berlaku
+- assertVisible:
+    id: papan-tabel
+- assertVisible:
+    id: papan-baris-cabai
+- assertVisible:
+    id: papan-baris-bawang
+- assertVisible:
+    id: papan-baris-kangkung
+- assertVisible:
+    id: fee-dekat
+- assertVisible:
+    id: fee-jauh
+# Teks dicocokkan sebagai regex terhadap seluruh elemen, maka diberi awalan/akhiran .*
+- assertVisible: ".*Rp1\\.500.*"
+- assertVisible: ".*Rp2\\.500.*"

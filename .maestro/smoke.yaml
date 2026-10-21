@@ -1,0 +1,14 @@
+# Smoke web: beranda termuat dan menautkan ke papan harga.
+# Jalankan: maestro test --platform web -e WEB_URL=http://localhost:3000 .maestro/smoke.yaml
+url: ${WEB_URL}
+name: Smoke beranda
+tags:
+  - smoke
+---
+- launchApp
+- assertVisible:
+    id: beranda-judul
+- assertVisible:
+    id: tautan-papan-harga
+- assertVisible:
+    id: tautan-profil
