@@ -1,11 +1,14 @@
 import type {
   Galat,
   Insiden,
+  AuditHasil,
   Invoice,
   Mitra,
   PapanHarga,
   Profil,
   RekapHarian,
+  StatusMitra,
+  TerbitPapanRequest,
   TokenResponse
 } from "$lib/api/types";
 
@@ -90,6 +93,16 @@ export function createLumbungClient(opts: ClientOptions) {
     adminInvoice: (token: string, minggu: string) =>
       request<{ data: Invoice[] }>("/admin/invoice", { token, query: { minggu } }).then((r) => r.data),
     adminMitra: (token: string) => request<{ data: Mitra[] }>("/admin/mitra", { token }).then((r) => r.data),
+    adminTerbitPapan: (token: string, body: TerbitPapanRequest) =>
+      request<AuditHasil>("/admin/papan-harga", { method: "POST", token, body }),
+    adminInvoiceLunas: (token: string, id: string) =>
+      request<AuditHasil>(`/admin/invoice/${encodeURIComponent(id)}/lunas`, { method: "POST", token }),
+    adminMitraStatus: (token: string, kode: string, status: StatusMitra) =>
+      request<AuditHasil>(`/admin/mitra/${encodeURIComponent(kode)}/status`, {
+        method: "POST",
+        token,
+        body: { status }
+      }),
     adminInsiden: (token: string) =>
       request<{ data: Insiden[] }>("/admin/insiden", { token }).then((r) => r.data)
   };

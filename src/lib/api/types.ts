@@ -67,3 +67,14 @@ export type StatusMitra = "AKTIF" | "NONAKTIF";
 export type Mitra = { kode: string; nama: string; status: StatusMitra };
 
 export type Insiden = { id: string; jenis: string; catatan?: string; waktu: string };
+
+/** Respons tulis beraudit (`audit_id` tampil di dasbor). `duplikat` true bila UUID klien sudah diproses. */
+export type AuditHasil = { audit_id: string; duplikat?: boolean };
+
+/** Badan `POST /admin/papan-harga`. Klien hanya mengirim harga referensi; fee/grade/harga dihitung server. */
+export type TerbitPapanRequest = {
+  uuid: string;
+  /** Hari Senin minggu berlaku. */
+  berlaku_mulai: string;
+  referensi: { komoditas: Komoditas; harga: [number, number, number] }[];
+};

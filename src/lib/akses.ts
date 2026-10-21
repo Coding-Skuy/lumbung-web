@@ -1,13 +1,13 @@
 import type { Peran } from "$lib/api/types";
 
-export type AreaAdmin = "rekap" | "invoice" | "mitra" | "insiden";
+export type AreaAdmin = "rekap" | "invoice" | "mitra" | "insiden" | "papan";
 
 /**
  * Hak peran di UI (FR-303): admin keuangan hanya rekap dan invoice; admin gudang semua.
  * Hanya penyaring tampilan; backend tetap otoritas (403 bila peran ditolak).
  */
 const MATRIKS: Partial<Record<Peran, readonly AreaAdmin[]>> = {
-  admin_gudang: ["rekap", "invoice", "mitra", "insiden"],
+  admin_gudang: ["rekap", "invoice", "mitra", "insiden", "papan"],
   admin_keuangan: ["rekap", "invoice"]
 };
 
@@ -29,4 +29,21 @@ export function tanggalValid(v: string | null): v is string {
   if (v === null || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
   const d = new Date(v + "T00:00:00Z");
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v;
+}
+
+export type AksiTulis = "terbit-papan" | "invoice-lunas" | "mitra-status";
+
+/**
+ * Peran yang boleh menulis. ASUMSI (belum ada di FRD/PRD, masih templat): papan dan mitra hanya admin gudang
+ * (openapi: terbit papan = `admin_gudang`); invoice lunas = admin keuangan dan admin gudang.
+ * Backend tetap otoritas (403 dicatat).
+ */
+const TULIS: Record<AksiTulis, readonly Peran[]> = {
+  "terbit-papan": ["admin_gudang"],
+  "invoice-lunas": ["admin_keuangan", "admin_gudang"],
+  "mitra-status": ["admin_gudang"]
+};
+
+export function bolehTulis(peran: string | undefined, aksi: AksiTulis): boolean {
+  return TULIS[aksi].includes(peran as Peran);
 }
