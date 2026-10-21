@@ -31,17 +31,14 @@ export function tanggalValid(v: string | null): v is string {
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v;
 }
 
-export type AksiTulis = "terbit-papan" | "invoice-lunas" | "mitra-status";
+export type AksiTulis = "terbit-papan";
 
 /**
- * Peran yang boleh menulis. ASUMSI (belum ada di FRD/PRD, masih templat): papan dan mitra hanya admin gudang
- * (openapi: terbit papan = `admin_gudang`); invoice lunas = admin keuangan dan admin gudang.
- * Backend tetap otoritas (403 dicatat).
+ * Hak tulis minimum (keputusan pemilik): admin web hanya menulis papan harga, hanya `admin_gudang`.
+ * Hak tulis lain hanya bila ada tiketnya. Backend tetap otoritas (403 dicatat).
  */
 const TULIS: Record<AksiTulis, readonly Peran[]> = {
-  "terbit-papan": ["admin_gudang"],
-  "invoice-lunas": ["admin_keuangan", "admin_gudang"],
-  "mitra-status": ["admin_gudang"]
+  "terbit-papan": ["admin_gudang"]
 };
 
 export function bolehTulis(peran: string | undefined, aksi: AksiTulis): boolean {

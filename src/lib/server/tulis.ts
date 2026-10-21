@@ -1,4 +1,4 @@
-import { KOMODITAS_PILOT, type StatusMitra, type TerbitPapanRequest } from "$lib/api/types";
+import { KOMODITAS_PILOT, type TerbitPapanRequest } from "$lib/api/types";
 
 type Hasil<T> = { ok: true; nilai: T } | { ok: false; pesan: string };
 
@@ -33,17 +33,4 @@ export function parseTerbitPapan(f: FormData): Hasil<TerbitPapanRequest> {
     referensi.push({ komoditas: k, harga: harga as [number, number, number] });
   }
   return { ok: true, nilai: { uuid, berlaku_mulai: mulai, referensi } };
-}
-
-export function parseStatusMitra(f: FormData): Hasil<{ kode: string; status: StatusMitra }> {
-  const kode = String(f.get("kode") ?? "");
-  const status = String(f.get("status") ?? "");
-  if (!/^PTN-\d{3}$/.test(kode)) return { ok: false, pesan: "Kode mitra tidak valid." };
-  if (status !== "AKTIF" && status !== "NONAKTIF") return { ok: false, pesan: "Status tidak valid." };
-  return { ok: true, nilai: { kode, status } };
-}
-
-export function parseInvoiceId(f: FormData): Hasil<string> {
-  const id = String(f.get("id") ?? "").trim();
-  return id && id.length <= 64 ? { ok: true, nilai: id } : { ok: false, pesan: "ID invoice tidak valid." };
 }

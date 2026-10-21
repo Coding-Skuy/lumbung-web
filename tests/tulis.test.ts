@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { bolehTulis, areaUntuk } from "../src/lib/akses";
 import { kgKeGram } from "../src/lib/satuan";
-import { namaHarga, parseInvoiceId, parseStatusMitra, parseTerbitPapan } from "../src/lib/server/tulis";
+import { namaHarga, parseTerbitPapan } from "../src/lib/server/tulis";
 import { ApiError, createLumbungClient } from "../src/lib/server/lumbung-client";
 
 const U = "0f8a6c3e-5b2d-4c1a-9e47-3a1d2b6c7f90";
@@ -60,24 +60,12 @@ describe("form terbit papan", () => {
   });
 });
 
-test("form status mitra dan invoice", () => {
-  expect(parseStatusMitra(form({ kode: "PTN-007", status: "NONAKTIF" }))).toEqual({ ok: true, nilai: { kode: "PTN-007", status: "NONAKTIF" } });
-  expect(parseStatusMitra(form({ kode: "PTN-7", status: "AKTIF" })).ok).toBe(false);
-  expect(parseStatusMitra(form({ kode: "PTN-007", status: "X" })).ok).toBe(false);
-  expect(parseInvoiceId(form({ id: "INV-1" })).ok).toBe(true);
-  expect(parseInvoiceId(form({ id: " " })).ok).toBe(false);
-});
-
-describe("hak tulis", () => {
-  test("terbit papan dan status mitra hanya admin gudang", () => {
+describe("hak tulis (minimum)", () => {
+  test("terbit papan hanya admin gudang", () => {
     expect(bolehTulis("admin_gudang", "terbit-papan")).toBe(true);
     expect(bolehTulis("admin_keuangan", "terbit-papan")).toBe(false);
-    expect(bolehTulis("admin_keuangan", "mitra-status")).toBe(false);
-  });
-  test("invoice lunas: keuangan dan gudang; peran lain tidak", () => {
-    expect(bolehTulis("admin_keuangan", "invoice-lunas")).toBe(true);
-    expect(bolehTulis("sopir", "invoice-lunas")).toBe(false);
-    expect(bolehTulis(undefined, "invoice-lunas")).toBe(false);
+    expect(bolehTulis("sopir", "terbit-papan")).toBe(false);
+    expect(bolehTulis(undefined, "terbit-papan")).toBe(false);
   });
   test("menu papan hanya admin gudang", () => {
     expect(areaUntuk("admin_gudang")).toContain("papan");
@@ -120,14 +108,5 @@ describe("klien tulis", () => {
     const e = await c.adminTerbitPapan("T", r.nilai).catch((x) => x);
     expect(e).toBeInstanceOf(ApiError);
     expect(e.status).toBe(409);
-  });
-  test("lunas dan status mitra: path ter-encode", async () => {
-    const a = rec(200, { audit_id: "AUD-2" });
-    await a.c.adminInvoiceLunas("T", "INV/1 x");
-    expect(a.seen.url).toBe("http://x/v1/admin/invoice/INV%2F1%20x/lunas");
-    const b = rec(200, { audit_id: "AUD-3" });
-    await b.c.adminMitraStatus("T", "PTN-007", "NONAKTIF");
-    expect(b.seen.url).toBe("http://x/v1/admin/mitra/PTN-007/status");
-    expect(JSON.parse(b.seen.body!)).toEqual({ status: "NONAKTIF" });
   });
 });

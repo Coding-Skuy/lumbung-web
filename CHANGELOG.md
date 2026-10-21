@@ -10,7 +10,7 @@ Semua perubahan penting lumbung-web dicatat di sini. Format mengikuti Keep a Cha
 
 - Halaman publik `/papan-harga` dan `/profil` (SSR, cache 15 menit), klien server-side, tipe kontrak (issue #2).
 - Dasbor admin baca SSR: `/admin/masuk`, `/admin/rekap`, `/admin/invoice`, `/admin/mitra`, `/admin/insiden` dengan sesi peran (issue #3).
-- Admin tulis beraudit: `/admin/papan-harga` (terbit), aksi invoice lunas dan status mitra, `audit_id` tampil; `kgKeGram` (issue #4).
+- Admin tulis beraudit minimum: `/admin/papan-harga` (terbit) dengan `audit_id` tampil; `kgKeGram` (issue #4). Aksi invoice lunas dan status mitra tidak diaktifkan (hak tulis minimum).
 
 ### Diubah
 - Pin `bun-types` 1.4.4 (tidak ada di npm) diganti 1.4.2 (issue #10).
