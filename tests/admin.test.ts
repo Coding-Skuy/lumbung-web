@@ -34,7 +34,7 @@ describe("hak peran (FR-303)", () => {
     expect(boleh("admin_keuangan", "insiden")).toBe(false);
   });
   test("admin gudang semua area", () => {
-    expect(areaUntuk("admin_gudang")).toHaveLength(4);
+    expect(areaUntuk("admin_gudang")).toHaveLength(5);
   });
   test("peran lain tanpa akses", () => {
     for (const p of ["sopir", "petani", "koordinator_tani", undefined]) expect(areaUntuk(p)).toEqual([]);
