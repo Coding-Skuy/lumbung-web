@@ -9,6 +9,7 @@ Semua perubahan penting lumbung-web dicatat di sini. Format mengikuti Keep a Cha
 - Fondasi build: `tsconfig.json`, `vite.config.ts`, adapter-node, vite-plugin-svelte, `src/app.html`, `src/app.d.ts`, skrip `test`, ADR-0002 (issue #10).
 
 - Halaman publik `/papan-harga` dan `/profil` (SSR, cache 15 menit), klien server-side, tipe kontrak (issue #2).
+- Alur E2E Maestro mode web (`.maestro/smoke.yaml`, `papan-harga-publik.yaml`), `data-testid` pada halaman publik, ADR-0003 tooling uji (issue #8).
 
 ### Diubah
 - Pin `bun-types` 1.4.4 (tidak ada di npm) diganti 1.4.2 (issue #10).
