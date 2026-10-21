@@ -1,4 +1,13 @@
-import type { Galat, PapanHarga, Profil } from "$lib/api/types";
+import type {
+  Galat,
+  Insiden,
+  Invoice,
+  Mitra,
+  PapanHarga,
+  Profil,
+  RekapHarian,
+  TokenResponse
+} from "$lib/api/types";
 
 /** Galat dari backend (status HTTP + pesan baku `{error}`) atau jaringan (status 0). */
 export class ApiError extends Error {
@@ -70,7 +79,19 @@ export function createLumbungClient(opts: ClientOptions) {
   return {
     request,
     publikPapanHarga: () => request<PapanHarga>("/publik/papan-harga"),
-    publikProfil: () => request<Profil>("/publik/profil")
+    publikProfil: () => request<Profil>("/publik/profil"),
+    authMasuk: (akun: string, pin: string) =>
+      request<TokenResponse>("/auth/masuk", { method: "POST", body: { akun, pin } }),
+    authRefresh: (refreshToken: string) =>
+      request<TokenResponse>("/auth/refresh", { method: "POST", body: { refresh_token: refreshToken } }),
+    authKeluar: (token: string) => request<void>("/auth/keluar", { method: "POST", token }),
+    adminRekapHarian: (token: string, tanggal: string) =>
+      request<RekapHarian>("/admin/rekap-harian", { token, query: { tanggal } }),
+    adminInvoice: (token: string, minggu: string) =>
+      request<{ data: Invoice[] }>("/admin/invoice", { token, query: { minggu } }).then((r) => r.data),
+    adminMitra: (token: string) => request<{ data: Mitra[] }>("/admin/mitra", { token }).then((r) => r.data),
+    adminInsiden: (token: string) =>
+      request<{ data: Insiden[] }>("/admin/insiden", { token }).then((r) => r.data)
   };
 }
 
