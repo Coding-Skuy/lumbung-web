@@ -2,7 +2,7 @@
   import type { LayoutData } from "./$types";
 
   let { data, children }: { data: LayoutData; children: import("svelte").Snippet } = $props();
-  const label = { rekap: "Rekap harian", invoice: "Invoice", mitra: "Mitra", insiden: "Insiden" } as const;
+  const label = { rekap: "Rekap harian", invoice: "Invoice", mitra: "Mitra", insiden: "Insiden", papan: "Terbitkan papan" } as const;
 </script>
 
 {#if data.peran}
