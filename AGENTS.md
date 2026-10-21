@@ -30,7 +30,7 @@ Angka terkunci v1.0.0 yang berlaku di seluruh repo Lumbung:
 
 | Lapisan | Pilihan terkunci |
 |---|---|
-| Runtime/paket | Bun `1.4.x` (pin exact di `package.json`: `bun-types` 1.4.4) |
+| Runtime/paket | Bun `1.4.x` (pin exact di `package.json`: `bun-types` 1.4.2, lihat ADR-0002) |
 | Framework | Svelte `5.35.0` (runes), SvelteKit `2.22.0` (SSR), Vite `7.0.4` |
 | Bahasa | TypeScript `5.9.2` strict |
 | Kunci API | `LUMBUNG_API_KEY` hanya di server (SSR), rotasi 90 hari |

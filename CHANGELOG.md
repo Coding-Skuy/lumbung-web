@@ -6,3 +6,7 @@ Semua perubahan penting lumbung-web dicatat di sini. Format mengikuti Keep a Cha
 
 ### Ditambahkan
 - Fondasi AI-dev v1.0.0: `AGENTS.md`, `CLAUDE.md`, `docs/decisions/` (ADR-0001), `versions/v1.0.0/docs/40-TECHSTACK.md`, `versions/v1.0.0/docs/60-BLAST-RADIUS.md` (tiket LMB-WEB-001, 2026-10-14).
+- Fondasi build: `tsconfig.json`, `vite.config.ts`, adapter-node, vite-plugin-svelte, `src/app.html`, `src/app.d.ts`, skrip `test`, ADR-0002 (issue #10).
+
+### Diubah
+- Pin `bun-types` 1.4.4 (tidak ada di npm) diganti 1.4.2 (issue #10).
