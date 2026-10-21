@@ -13,3 +13,4 @@ Keputusan arsitektur repo ini dicatat sebagai ADR.
 ## Daftar
 
 - [ADR-0001 — Fondasi teknis](./ADR-0001-fondasi-teknis.md)
+- [ADR-0002 — Koreksi pin bun-types dan fondasi build](./ADR-0002-koreksi-pin-bun-types.md)
