@@ -1,6 +1,6 @@
 # ADR-0002 — Koreksi pin bun-types dan fondasi build
 
-- Status: Diusulkan (menunggu persetujuan pemilik repo; menggantikan sebagian ADR-0001/AGENTS.md butir "pin `bun-types` 1.4.4")
+- Status: Diterima (disetujui pemilik, 2026-10-21; menggantikan sebagian ADR-0001/AGENTS.md butir "pin `bun-types` 1.4.4")
 - Tanggal: 2026-10-21
 
 ## Konteks
@@ -17,4 +17,4 @@ Issue #10: `bun install` gagal karena `bun-types@1.4.4` tidak ada di registry np
 ## Konsekuensi
 
 - `bun install && bun run check && bun test && bun run build` dapat dijalankan dari checkout bersih.
-- Bila pemilik memilih versi bun-types lain (mis. 1.4.3), cukup ADR pengganti dan ubah satu baris.
+- Pin mengikuti Bun terpasang (`bun --version` = 1.4.2); naik versi Bun = ADR pengganti dan ubah satu baris.
