@@ -6,10 +6,14 @@
 
 Closes #
 
+## Ketergantungan
+
+<!-- "Bergantung pada #N, merge berurutan" bila branch bertumpuk; kontrak API: sebut openapi/branch backend dan asumsi -->
+
 ## Cara uji
 
 ```bash
-bun install && bun run check && bun test
+bun install && bun run check && bun test && bun run build
 ```
 
 ## Bukti (output uji)
@@ -23,6 +27,6 @@ bun install && bun run check && bun test
 ## Daftar periksa
 
 - [ ] `CHANGELOG.md` diperbarui
-- [ ] Uji ditambahkan/diperbarui
+- [ ] Uji ditambahkan/diperbarui; `graphify update .` dijalankan
 - [ ] Tidak ada rahasia/kunci di diff
 - [ ] Dokumen `versions/v*` tidak diedit
