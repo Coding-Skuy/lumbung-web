@@ -18,3 +18,7 @@ dist/
 .idea/
 .DS_Store
 *.local
+
+# Uji kontrak
+contract/.out/
+.schemathesis/
